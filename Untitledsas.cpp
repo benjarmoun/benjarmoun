@@ -150,6 +150,7 @@ void fidelisation(cmpt c[50],int m){																		//add 1.3% to top 3 accoun
 		c[i].montant=c[i].montant+c[i].montant*1.3/100;
 	}
 	printf("OPPERATION EFFECTUEE\n");
+	afficher(c,3);
 }
 
 //							*********************************************************************************************************************
@@ -195,27 +196,29 @@ main(){
     		break;
 
         case (3):																			//Operations
-            printf("1-Retrait\n");																				
-			printf("2-Depot\n");
-			printf("3-Annuler\n");
+            printf("\n1-Retrait\n");																				
+			printf("\n2-Depot\n");
+			printf("\n3-Annuler\n");
 			scanf("%d",&operation);																					
             switch(operation){
             	
 				case (1):																							//Retrait
-					printf("Entrer votre CIN\n");
+					printf("\nEntrer votre CIN\t");
             		scanf("%s",Cin);
 					recherch(c,Cin,m);
 					if(recherch(c,Cin,m)==-1){
-						printf("CIN invalide \n");
+						printf("\nCIN invalide\t");
 						system ("pause");
 						system ("cls");
 						main();																					//check
 						break;																						//check
 					}																								//check
 					else{																							//check
-						printf("Entrer le montant que vous voulez retirer\n");
-            			scanf("%d",&retrait);
 						pos=recherch(c,Cin,m);
+						printf("\nMontant actuel: %.2f\t",c[pos].montant);
+						printf("\nEntrer le montant que vous voulez retirer\t");
+            			scanf("%d",&retrait);
+						
 						printf("CIN: %s\n",c[pos].cin);
 						printf("NOM: %s\n",c[pos].nom);
 						printf("PRENOM: %s\n",c[pos].prenom);
