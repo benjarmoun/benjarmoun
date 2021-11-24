@@ -27,33 +27,34 @@ int recherch(cmpt c[50],char Cin[10],int m){																//find account by ID
 
 void introduire(cmpt c[50],int m){
 	
-	printf("\nEntrer votre CIN: ");
+	printf("\n Entrer votre CIN: ");
 	scanf("%s",id);
 	if(recherch(c,id,m)==-1){
 		strcpy(c[m].cin,id);
 	}else{
-		printf("CIN deja utilise\n");
+		printf("\n CIN deja utilise!!\n");
 		system ("pause");
 		system ("cls");
         main();
 	}
 	
-	printf("\nEntrer votre nom: ");
+	printf("\n Entrer votre nom: ");
 	scanf("%s",c[m].nom);
-	printf("\nEntrer votre prenom: ");
+	printf("\n Entrer votre prenom: ");
 	scanf("%s",c[m].prenom);
-	printf("\nEntrer votre montant: ");
+	printf("\n Entrer votre montant: ");
 	scanf("%f",&c[m].montant);
+	printf("\n");
 }
 
 void afficher(cmpt c[50],int m){
 	int i;
 	for(i=0;i<m;i++){
-		printf("			Compte %d:\n",i+1);
-		printf("CIN: %s\n",c[i].cin);
-		printf("NOM: %s\n",c[i].nom);
-		printf("PRENOM: %s\n",c[i].prenom);
-		printf("MONTANT: %.2f\n",c[i].montant);
+		printf("\n			Compte %d:",i+1);
+		printf("\n\tCIN: %s",c[i].cin);
+		printf("\n\tNOM: %s",c[i].nom);
+		printf("\n\tPRENOM: %s",c[i].prenom);
+		printf("\n\tMONTANT: %.2f\n",c[i].montant);
 		}
 }
 
@@ -83,11 +84,11 @@ void aff_croi_depuix(cmpt c[50],int montant_min,int m){
 	}
 	
 	for(i=p;i<m;i++){
-		printf("			Compte %d:\n",i+1);
-		printf("CIN: %s\n",c[i].cin);
-		printf("NOM: %s\n",c[i].nom);
-		printf("PRENOM: %s\n",c[i].prenom);
-		printf("MONTANT: %.2f\n",c[i].montant);	
+		printf("			Compte %d:",i+1);
+		printf("\n\tCIN: %s",c[i].cin);
+		printf("\n\tNOM: %s",c[i].nom);
+		printf("\n\tPRENOM: %s",c[i].prenom);
+		printf("\n\tMONTANT: %.2f\n",c[i].montant);	
 	}
 }
 
@@ -104,11 +105,11 @@ void aff_decroi_depuix(cmpt c[50],int montant_min,int m){
 	}
 				//affichage
 	for(i=m-1;i>=p;i--){
-		printf("			Compte %d:\n",i+1);
-		printf("CIN: %s\n",c[i].cin);
-		printf("NOM: %s\n",c[i].nom);
-		printf("PRENOM: %s\n",c[i].prenom);
-		printf("MONTANT: %.2f\n",c[i].montant);	
+		printf("\n			Compte %d:",i+1);
+		printf("\n\tCIN: %s",c[i].cin);
+		printf("\n\tNOM: %s",c[i].nom);
+		printf("\n\tPRENOM: %s",c[i].prenom);
+		printf("\n\tMONTANT: %.2f\n",c[i].montant);	
 	}
 }
 
@@ -128,19 +129,19 @@ void tri_decroi(cmpt c[50],int m){
 
 int Retrait(cmpt c[50],int z,int R){																		//withraw
 	if(c[z].montant<R){
-		printf("montant insuffisant!!\n");
+		printf("\n montant insuffisant!!\n");
 		return 0;
 	}
 	else{
 		c[z].montant=c[z].montant-R;
-		printf("Votre nouveau montant est:%.2f\n",c[z].montant);
+		printf("\n Votre nouveau montant est: %.2f\n",c[z].montant);
 	}
 }
 
 void Depot(cmpt c[50],int z,int D){																			//deposition
 	
 	c[z].montant=c[z].montant+D;
-		printf("Votre nouveau montant est:%.2f\n",c[z].montant);
+		printf("\n Votre nouveau montant est: %.2f\n",c[z].montant);
 }
 
 void fidelisation(cmpt c[50],int m){																		//add 1.3% to top 3 accounts
@@ -149,7 +150,7 @@ void fidelisation(cmpt c[50],int m){																		//add 1.3% to top 3 accoun
 	for(i=0;i<3;i++){
 		c[i].montant=c[i].montant+c[i].montant*1.3/100;
 	}
-	printf("OPPERATION EFFECTUEE\n");
+	printf("\n OPPERATION EFFECTUEE.\n");
 	afficher(c,3);
 }
 
@@ -159,15 +160,15 @@ main(){
     char Cin[10];
     
 
-	printf("\n\n\t----------------MENU----------------\n\n");
-    printf("choose an option\n");
+	printf("\n\n\t\t----------------MENU----------------\n\n");
+    printf("\n  Choisis une option\n");
     
-    printf("1-Introduire un compte bancaire \n");
-	printf("2-Introduire plusieurs comptes bancaires \n");
-	printf("3-Operations\n");
-	printf("4-Affichage\n");
-	printf("5-Fidelisation\n");
-	printf("6-Quitter l'application\n");
+    printf("\n\t1-Introduire un compte bancaire");
+	printf("\n\t2-Introduire plusieurs comptes bancaires");
+	printf("\n\t3-Operations");
+	printf("\n\t4-Affichage");
+	printf("\n\t5-Fidelisation");
+	printf("\n\t6-Quitter l'application\n");
 	
 	scanf("%d",&option);
 
@@ -184,7 +185,7 @@ main(){
             break;
 
         case (2):																			//Introduire plusieurs comptes
-			printf("Entrer le nombre de comptes que vous voulez inserer\n");
+			printf("\n Entrer le nombre de comptes que vous voulez inserer: ");
 			scanf("%d",&n);
 			for(i=m;i<m+n;i++){
 				introduire(c,i);
@@ -196,18 +197,19 @@ main(){
     		break;
 
         case (3):																			//Operations
-            printf("\n1-Retrait\n");																				
-			printf("\n2-Depot\n");
-			printf("\n3-Annuler\n");
+            printf("\n  Choisis une option\n");
+		    printf("\n\t1-Retrait");																				
+			printf("\n\t2-Depot");
+			printf("\n\t3-Annuler\n");
 			scanf("%d",&operation);																					
             switch(operation){
             	
 				case (1):																							//Retrait
-					printf("\nEntrer votre CIN\t");
+					printf("\n Entrer votre CIN: ");
             		scanf("%s",Cin);
 					recherch(c,Cin,m);
 					if(recherch(c,Cin,m)==-1){
-						printf("\nCIN invalide\t");
+						printf("\n CIN invalide!!\n");
 						system ("pause");
 						system ("cls");
 						main();																					//check
@@ -215,14 +217,14 @@ main(){
 					}																								//check
 					else{																							//check
 						pos=recherch(c,Cin,m);
-						printf("\nMontant actuel: %.2f\t",c[pos].montant);
-						printf("\nEntrer le montant que vous voulez retirer\t");
+						printf("\n Montant actuel: %.2f",c[pos].montant);
+						printf("\n Entrer le montant que vous voulez retirer: ");
             			scanf("%d",&retrait);
 						
-						printf("CIN: %s\n",c[pos].cin);
-						printf("NOM: %s\n",c[pos].nom);
-						printf("PRENOM: %s\n",c[pos].prenom);
-						printf("MONTANT: %.2f\n",c[pos].montant);
+						printf("\n\tCIN: %s",c[pos].cin);
+						printf("\n\tNOM: %s",c[pos].nom);
+						printf("\n\tPRENOM: %s",c[pos].prenom);
+						printf("\n\tMONTANT: %.2f\n\t",c[pos].montant);
 						Retrait(c,pos,retrait);
 					}
 					system ("pause");
@@ -231,24 +233,24 @@ main(){
             		break;
             		
             	case (2):																							//Dépôt
-            		printf("Entrer votre CIN\n");
+            		printf("\n Entrer votre CIN: ");
             		scanf("%s",Cin);
 					recherch(c,Cin,m);
 					if(recherch(c,Cin,m)==-1){
-						printf("CIN invalide \n");
+						printf("\n CIN invalide!!\n");
 						system ("pause");
 						system ("cls");
 						main();
 						break;
 					}
 					else{
-						printf("Entrer le montant que vous voulez deposer\n");
+						printf("\n Entrer le montant que vous voulez deposer: ");
             			scanf("%d",&depot);
 						pos=recherch(c,Cin,m);
-						printf("CIN: %s\n",c[pos].cin);
-						printf("NOM: %s\n",c[pos].nom);
-						printf("PRENOM: %s\n",c[pos].prenom);
-						printf("MONTANT: %.2f\n",c[pos].montant);
+						printf("\n\tCIN: %s",c[pos].cin);
+						printf("\n\tNOM: %s",c[pos].nom);
+						printf("\n\tPRENOM: %s",c[pos].prenom);
+						printf("\n\tMONTANT: %.2f\n",c[pos].montant);
 						Depot(c,pos,depot);
 					}
 					system ("pause");
@@ -262,7 +264,7 @@ main(){
 					break;
 				
 				default:
-					printf("Erreur! operateur incorrect\n");
+					printf("\n Erreur! operateur incorrect.\n");
 					system ("pause");
 					system ("cls");
 					main();
@@ -271,14 +273,14 @@ main(){
             break;
 
         case (4):																			//Affichage
-        	printf("Choose an option\n");
+        	printf("\n  Choisis une option\n");
         	
-            printf("\n1-Affichage par Ordre Ascendant");
-            printf("\n2-Affichage par Ordre Descendant");
-            printf("\n3-Affichage par Ordre Ascendant (les comptes bancaire ayant un montant supérieur à un chiffre introduit)");
-            printf("\n4-Affichage par Ordre Descendant (les comptes bancaire ayant un montant supérieur à un chiffre introduit)");
-            printf("\n5-Recherche par CIN");
-            printf("\n6-Annuler\n");
+            printf("\n\t1-Affichage par Ordre Ascendant");
+            printf("\n\t2-Affichage par Ordre Descendant");
+            printf("\n\t3-Affichage par Ordre Ascendant des comptes bancaire ayant un montant superieur a un chiffre introduit");
+            printf("\n\t4-Affichage par Ordre Descendant des comptes bancaire ayant un montant superieur a un chiffre introduit");
+            printf("\n\t5-Recherche par CIN");
+            printf("\n\t6-Annuler\n");
             
             scanf("%d",&affichage);
             
@@ -302,16 +304,17 @@ main(){
 
     				case (3):																						//Ordre Ascendant > n
         				int montant_min;
-						printf("Entrer le montant minimal\n");
+						printf("\n Entrer le montant minimal: ");
 						scanf("%d",&montant_min);
 						aff_croi_depuix(c,montant_min,m);
         				
 						system ("pause");
-						system ("cls");main();
+						system ("cls");
+						main();
 						break;
 
         			case (4):																						//Ordre Descendant > n
-						printf("Entrer le montant minimal\n");
+						printf("\n Entrer le montant minimal: ");
 						scanf("%d",&montant_min);
 						aff_decroi_depuix(c,montant_min,m);
         			    system ("pause");
@@ -320,20 +323,20 @@ main(){
         				break;
          			     
 					case (5):																						//Recherche par CIN
-        			    printf("Entrer le CIN dont vous voulez chercher \n");
+        			    printf("\n Entrer le CIN dont vous voulez chercher: ");
         			    scanf("%s",Cin);
 						pos=recherch(c,Cin,m);
 						if(pos==-1){
-							printf("CIN invalide \n");
+							printf("\n CIN invalide!!\n");
 							system ("pause");
 							system ("cls");
 							main();
 						}
-						printf("CIN: %s\n",c[pos].cin);
-						printf("NOM: %s\n",c[pos].nom);
-						printf("PRENOM: %s\n",c[pos].prenom);
-						printf("MONTANT: %.2f\n",c[pos].montant);
-						printf("indice: %d",pos);
+						printf("\n\tCIN: %s",c[pos].cin);
+						printf("\n\tNOM: %s",c[pos].nom);
+						printf("\n\tPRENOM: %s",c[pos].prenom);
+						printf("\n\tMONTANT: %.2f\n",c[pos].montant);
+//						printf("\n\tindice: %d",pos);
 						system ("pause");
 						system ("cls");
 						main();
@@ -345,7 +348,7 @@ main(){
 						break;
        				 
 					default:
-    					printf("Erreur! operateur incorrect\n");
+    					printf("\n Erreur! operateur incorrect,\n");
     					system ("pause");
 						system ("cls");
 						main();	
@@ -363,7 +366,7 @@ main(){
             break;
         
         default:
-        	printf("Erreur! operateur incorrect\n");
+        	printf("\n Erreur! operateur incorrect");
         	scanf("%s",sol);
 			system("cls");
 			main();
