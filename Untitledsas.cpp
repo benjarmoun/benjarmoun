@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #include <string.h>
 
-int r=0,m=0,n=0,p=0;
-char id[10],sol[10];
+int m=0;
+char id[10];
 
 typedef struct cmpt{
 	char cin[10];
@@ -14,6 +14,7 @@ typedef struct cmpt{
 
 cmpt c[50];
 int main();
+
 int recherch(cmpt c[50],char Cin[10],int m){																//find account by ID
 	int i;
 	for(i=0;i<m;i++){
@@ -60,27 +61,33 @@ void afficher(cmpt c[50],int m){
 
 void tri_croi(cmpt c[50],int m){
 	int i,j;
-	cmpt t[10];
+	cmpt t;
 	for(i=0;i<m;i++){
 		for(j=i+1;j<m;j++){
 			if(c[i].montant>c[j].montant){
-				t[i]=c[i];
+				t=c[i];
 				c[i]=c[j];
-				c[j]=t[i];
+				c[j]=t;
 			}	
 		}
 	}	
 }
 
-void aff_croi_depuix(cmpt c[50],int montant_min,int m){
+int aff_croi_depuix(cmpt c[50],int montant_min,int m,int p){
 	int i;
-
+	p=-1;
+	
 	tri_croi(c,m);
 	for(i=0;i<m;i++){
 		if(c[i].montant>=montant_min){
 			p=i;
 			break;
 		}		
+	}
+	
+	if(p==-1){
+		printf("\n Aucun montant n'est supperieur a %d\n",montant_min);
+		return 0;
 	}
 	
 	for(i=p;i<m;i++){
@@ -92,17 +99,24 @@ void aff_croi_depuix(cmpt c[50],int montant_min,int m){
 	}
 }
 
-void aff_decroi_depuix(cmpt c[50],int montant_min,int m){
+int aff_decroi_depuix(cmpt c[50],int montant_min,int m,int p){
 	int i;
-
+	p=-1;
+	
 	tri_croi(c,m);						
 									//find min pos 
 	for(i=0;i<m;i++){
 		if(c[i].montant>=montant_min){
 			p=i;
 			break;
-		}	
+		}
 	}
+	
+	if(p==-1){
+		printf("\n Aucun montant n'est supperieur a %d\n",montant_min);
+		return 0;
+	}
+	
 				//affichage
 	for(i=m-1;i>=p;i--){
 		printf("\n			Compte %d:",i+1);
@@ -115,13 +129,13 @@ void aff_decroi_depuix(cmpt c[50],int montant_min,int m){
 
 void tri_decroi(cmpt c[50],int m){
 	int i,j;
-	cmpt t[10];
+	cmpt t;
 	for(i=0;i<m;i++){
 		for(j=i+1;j<m;j++){
 			if(c[i].montant<c[j].montant){
-				t[i]=c[i];
+				t=c[i];
 				c[i]=c[j];
-				c[j]=t[i];
+				c[j]=t;
 			}	
 		}
 	}	
@@ -156,8 +170,8 @@ void fidelisation(cmpt c[50],int m){																		//add 1.3% to top 3 accoun
 
 //							*********************************************************************************************************************
 main(){
-	int option,operation,affichage,i,pos,retrait,depot;
-    char Cin[10];
+	int option,operation,affichage,i,pos,retrait,depot,n=0,p;
+    char Cin[10],sol[10];
     
 
 	printf("\n\n\t\t----------------MENU----------------\n\n");
@@ -175,9 +189,8 @@ main(){
     switch(option){
 
 		case (1):																			//Introduire un compte bancaire
-			for(i=m;i<m+1;i++){
-				introduire(c,i);
-			}
+			
+			introduire(c,m);
 			m++;
 			system ("pause");
 			system ("cls");
@@ -215,7 +228,7 @@ main(){
 						main();																					//check
 						break;																						//check
 					}																								//check
-					else{																							//check
+					else{																					 		//check
 						pos=recherch(c,Cin,m);
 						printf("\n Montant actuel: %.2f",c[pos].montant);
 						printf("\n Entrer le montant que vous voulez retirer: ");
@@ -224,7 +237,7 @@ main(){
 						printf("\n\tCIN: %s",c[pos].cin);
 						printf("\n\tNOM: %s",c[pos].nom);
 						printf("\n\tPRENOM: %s",c[pos].prenom);
-						printf("\n\tMONTANT: %.2f\n\t",c[pos].montant);
+						printf("\n\tMONTANT PRECEDENT: %.2f\n\t",c[pos].montant);
 						Retrait(c,pos,retrait);
 					}
 					system ("pause");
@@ -250,7 +263,7 @@ main(){
 						printf("\n\tCIN: %s",c[pos].cin);
 						printf("\n\tNOM: %s",c[pos].nom);
 						printf("\n\tPRENOM: %s",c[pos].prenom);
-						printf("\n\tMONTANT: %.2f\n",c[pos].montant);
+						printf("\n\tMONTANT PRECEDENT: %.2f\n",c[pos].montant);
 						Depot(c,pos,depot);
 					}
 					system ("pause");
@@ -306,7 +319,7 @@ main(){
         				int montant_min;
 						printf("\n Entrer le montant minimal: ");
 						scanf("%d",&montant_min);
-						aff_croi_depuix(c,montant_min,m);
+						aff_croi_depuix(c,montant_min,m,p);
         				
 						system ("pause");
 						system ("cls");
@@ -316,7 +329,7 @@ main(){
         			case (4):																						//Ordre Descendant > n
 						printf("\n Entrer le montant minimal: ");
 						scanf("%d",&montant_min);
-						aff_decroi_depuix(c,montant_min,m);
+						aff_decroi_depuix(c,montant_min,m,p);
         			    system ("pause");
 						system ("cls");
 						main();
@@ -351,7 +364,7 @@ main(){
     					printf("\n Erreur! operateur incorrect,\n");
     					system ("pause");
 						system ("cls");
-						main();	
+						main();
 					}
         			break;
 
@@ -365,12 +378,15 @@ main(){
         case (6):																			//Quitter l'application
             break;
         
+//        case (7):
+//        	afficher(c,m);
+//        	break;
+        	
         default:
         	printf("\n Erreur! operateur incorrect");
         	scanf("%s",sol);
 			system("cls");
-			main();
-				
+			main();				
     }
 }
 
